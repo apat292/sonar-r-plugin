@@ -16,7 +16,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 
-SONAR_NAME=sonarqube-8.9.8.54436
+SONAR_NAME=sonarqube-9.9.2.77730
 URL="https://binaries.sonarsource.com/Distribution/sonarqube/${SONAR_NAME}.zip"
 
 set -euo pipefail
@@ -36,7 +36,7 @@ mkdir -p "${SONAR_WORK}"
 
 SONAR_ZIP="${SONAR_WORK}/${SONAR_NAME}.zip"
 
-[ -s "${SONAR_ZIP}" ] || wget --no-check-certificate -O "${SONAR_ZIP}" "${URL}"
+[ -s "${SONAR_ZIP}" ] || curl -sSk -o "${SONAR_ZIP}" "${URL}"
 
 SONAR_INSTANCE="${SONAR_WORK}/${SONAR_NAME}"
 
@@ -45,4 +45,3 @@ SONAR_INSTANCE="${SONAR_WORK}/${SONAR_NAME}"
 echo "SonarQube Instance: ${SONAR_INSTANCE}"
 
 "${SONAR_INSTANCE}/bin/macosx-universal-64/sonar.sh" "$@"
-
